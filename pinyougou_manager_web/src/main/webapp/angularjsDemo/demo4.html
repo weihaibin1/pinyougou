@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>angular入门demo之初始化指令</title>
+    <script type="text/javascript" src="../plugins/angularjs/angular.min.js"></script>
+    <script type="text/javascript">
+        //定义模块  参数一：模块名 参数二：依赖的其他模块 ，如果没有依赖其他模块，也需要声明空数组
+        var app = angular.module("myapp",[]);
+        //定义控制器  参数一：控制器名称  参数二：控制器做的事情
+        //$scope angularjs内置对象，全局作用域对象  作用：html与js数据交换的桥梁
+        app.controller("myctrl",function ($scope) {
+            //$scope.name="zhangsan";
+        });
+    </script>
+</head>
+<!--ng-app声明模块，作用：定义angularjs作用范围-->
+<body>
+<!--ng-controller声明控制器-->
+<div ng-app="myapp" ng-controller="myctrl" ng-init="name='李四'">
+    <!--ng-model绑定模型数据的指令-->
+    请输入：<input type="text" ng-model="name"><br>
+       输入的内容是： {{name}}
+</div>
+</body>
+</html>

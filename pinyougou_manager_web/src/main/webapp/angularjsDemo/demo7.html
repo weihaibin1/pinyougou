@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>angular入门demo之对象数组</title>
+    <script type="text/javascript" src="../plugins/angularjs/angular.min.js"></script>
+    <script type="text/javascript">
+        //定义模块  参数一：模块名 参数二：依赖的其他模块 ，如果没有依赖其他模块，也需要声明空数组
+        var app = angular.module("myapp",[]);
+        //定义控制器  参数一：控制器名称  参数二：控制器做的事情
+        //$scope angularjs内置对象，全局作用域对象  作用：html与js数据交换的桥梁
+        app.controller("myctrl",function ($scope) {
+            //数组[]  对象：{}
+           $scope.list=[
+               {name:"zhangsan",shuxue:20,yuwen:30},
+               {
+                   name:"zhaosi",shuxue:10,yuwen:90
+               },{
+                   name:"王五",shuxue:90,yuwen:100
+               }
+           ];
+        });
+    </script>
+</head>
+<!--ng-app声明模块，作用：定义angularjs作用范围-->
+<body>
+<!--ng-controller声明控制器-->
+<div ng-app="myapp" ng-controller="myctrl">
+    <table>
+        <tr>
+            <th>姓名</th>
+            <th>数学</th>
+            <th>语文</th>
+        </tr>
+        <!--ng-repeat循环遍历指令-->
+        <tr ng-repeat="user in list">
+            <td>{{user.name}}</td>
+            <td>{{user.shuxue}}</td>
+            <td>{{user.yuwen}}</td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

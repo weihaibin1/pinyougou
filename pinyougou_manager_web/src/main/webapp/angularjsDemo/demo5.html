@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>angular入门demo之初始化指令</title>
+    <script type="text/javascript" src="../plugins/angularjs/angular.min.js"></script>
+    <script type="text/javascript">
+        //定义函数
+        function helloController($scope) {
+            $scope.greeting = {
+                text: "hello" //模型层
+            };
+        }
+    </script>
+</head>
+<body ng-app>
+<div ng-controller="helloController"> //控制层
+    <p>{{greeting.text}},angular!</p> //视图层
+</div>
+</body>
+</html>
