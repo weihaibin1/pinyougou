@@ -56,6 +56,8 @@ public class SellerController {
 			return new Result(false, "增加失败");
 		}
 	}
+
+
 	
 	/**
 	 * 修改
@@ -110,5 +112,20 @@ public class SellerController {
 	public PageResult search(@RequestBody TbSeller seller, int page, int rows  ){
 		return sellerService.findPage(seller, page, rows);		
 	}
-	
+
+	/**
+	 * 商家审核
+	 *
+	 * @return
+	 */
+	@RequestMapping("/updateStatus")
+	public Result updateStatus(String sellerId , String status){
+		try {
+			sellerService.updateStatus(sellerId,status);
+			return new Result(true, "审核成功");
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new Result(false, "审核失败");
+		}
+	}
 }

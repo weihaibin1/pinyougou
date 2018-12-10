@@ -32,6 +32,9 @@
 		<headers>
 			<frame-options policy="SAMEORIGIN" />
 		</headers>
+
+		<!--退出系统配置-->
+		<logout/>
 	</http>
 	
 	<!-- 认证管理器 -->
