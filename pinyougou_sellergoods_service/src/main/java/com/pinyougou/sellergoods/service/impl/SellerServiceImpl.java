@@ -48,7 +48,7 @@ public class SellerServiceImpl implements SellerService {
 	@Override
 	public void add(TbSeller seller) {
 		//商家状态和create_timr需要后端组装
-		seller.setStatus("0");
+		seller.setStatus("0");   //未审核
 		seller.setCreateTime(new Date());
 		sellerMapper.insert(seller);		
 	}
