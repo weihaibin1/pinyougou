@@ -48,4 +48,16 @@ app.controller("baseController", function ($scope) {
         }
         return value;
     }
+
+    //基于数组中对象的属性名获取该对象 并返回
+    $scope.getObjectByKey = function (list, key, value) {
+        for(var i=0;i<list.length;i++){
+            //存在对象时
+            if(list[i][key]==value){
+                return list[i];
+            }
+        }
+        return null;
+    }
+
 })
