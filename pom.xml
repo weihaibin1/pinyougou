@@ -15,6 +15,7 @@
         <module>pinyougou_manager_web</module>
         <module>pinyougou_shop_web</module>
         <module>pinyougou_common</module>
+        <module>pinyougou_content_interface</module>
     </modules>
     <packaging>pom</packaging>
 

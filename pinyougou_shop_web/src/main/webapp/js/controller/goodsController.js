@@ -142,7 +142,7 @@ app.controller('goodsController' ,function($scope,$controller   ,goodsService,it
     }
 
     //初始化entity对象
-	$scope.entity={goods:{},goodDesc:{itemImage:[],sapecificationItems:[]},itemList:[]};
+	$scope.entity={goods:{isEnableSpec:'1'},goodDesc:{itemImage:[],sapecificationItems:[]},itemList:[]};
 	//添加上传的商品图片到商品图片列表中
 	$scope.addImageEntity=function () {
         $scope.entity.goodDesc.itemImage.push($scope.imageEntity);
@@ -176,5 +176,76 @@ app.controller('goodsController' ,function($scope,$controller   ,goodsService,it
 			//如果不存在
             $scope.entity.goodDesc.sapecificationItems.push({"attributeName":specName,"attributeValue":[specOption]})
 		}
+    }
+
+    //创建item列表
+	$scope.createItemList=function () {
+		//初始化item对象
+		$scope.entity.itemList=[{spec:{},price:0,num:99999,status:"1",isDefault:"0"}];
+
+		//勾选规格结果集
+		//specList:[{"attributeName":"网络","attributeValue":["移动3G","移动4G"]},{"attributeName":"机身内存","attributeValue":["16G"]}]
+        var specList = $scope.entity.goodDesc.sapecificationItems;
+        //如果规格选项全部取消
+		if (specList==0){
+            $scope.entity.itemList=[];
+		}
+		for (var i = 0;i<specList.length;i++){
+			//动态为列表中spec属性赋值方法，动态生成sku列表  行列方法
+            $scope.entity.itemList=addCoulmn($scope.entity.itemList,specList[i].attributeName,specList[i].attributeValue);
+		}
+    }
+
+    addCoulmn=function (itemList, specName, specOptions) {
+		var newList = [];
+		//动态组装itemList列表中的spec对象数据  参考对象示例：{"机身内存":"16G","网络":"联通3G"}
+		for(var i = 0;i<itemList.length;i++){
+			//获取itemList列表对象
+			//{spec:{},price:0,num:99999,status:1,isDefault:0}
+			var item = itemList[i]
+
+			//遍历勾选的规格选项列表
+			for (var j=0;j<specOptions.length;j++){
+				//基于深克隆实现item对象操作
+				var newItem = JSON.parse(JSON.stringify(item));
+                newItem.spec[specName]=specOptions[j];
+
+                newList.push(newItem)
+			}
+		}
+		return newList;
+    }
+
+    //定义商品状态数组
+    $scope.status=['未审核','已审核','审核未通过','关闭'];
+
+	//初始化分类列表
+    $scope.itemCatList=[];
+
+	//定义查询所有分类的方法
+    $scope.selectItemCatList=function() {
+        itemCatService.findAll(). success(function (response) {
+            //定义记录分类列表的数组
+            for (var i = 0; i < response.length; i++) {
+                $scope.itemCatList[response[i].id] = response[i].name;
+            }
+        })
+    }
+
+    //定义商品上下架状态数组
+    $scope.isMarketable=['下架','上架'];
+    //批量上下架
+    $scope.updateIsMarketable=function(isMarketable){
+        //获取选中的复选框
+        goodsService.updateIsMarketable( $scope.selectIds,isMarketable).success(
+            function(response){
+                if(response.success){
+                    $scope.reloadList();//刷新列表
+                    $scope.selectIds=[];//清空记录id的数组
+                }else {
+                    alert(response.message);
+                }
+            }
+        );
     }
 });	
