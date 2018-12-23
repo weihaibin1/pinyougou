@@ -1,6 +1,4 @@
 package com.pinyougou.sellergoods.service.impl;
-import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
@@ -9,8 +7,10 @@ import com.pinyougou.pojo.TbItemCat;
 import com.pinyougou.pojo.TbItemCatExample;
 import com.pinyougou.pojo.TbItemCatExample.Criteria;
 import com.pinyougou.sellergoods.service.ItemCatService;
-
 import entity.PageResult;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.List;
 
 /**
  * 服务实现层
@@ -74,17 +74,18 @@ public class ItemCatServiceImpl implements ItemCatService {
 	@Override
 	public void delete(Long[] ids) {
 		for(Long id:ids){
-			TbItemCatExample example = new TbItemCatExample();
-			Criteria criteria = example.createCriteria();
-			criteria.andParentIdEqualTo(id);
-			List<TbItemCat> tbItemCats = itemCatMapper.selectByExample(example);
-			//根据id查询子分类 ，如果查询结果有值  抛出运行时异常
-			if (tbItemCats.size()!=0){
-				throw new RuntimeException("不允许直接删除，包含子分类的分类数据");
-			}else {
-				itemCatMapper.deleteByPrimaryKey(id );
+			//根据id查询子分类 ，如果查询结果有值，抛出运行时异常
+			/*if(){
+				throw new RuntimeException("不允许直接删除包含子分类的分类数据");
+			}*/
+			//根据当地分类id作为parentId查询字分类数据，如果查询结果有数据，抛出运行时异常
+			List<TbItemCat> itemCatList = findByParentId(id);
+			if(itemCatList!=null && itemCatList.size()>0){
+				throw new RuntimeException("不允许直接删除包含子分类的分类数据");
 			}
-		}
+
+			itemCatMapper.deleteByPrimaryKey(id);
+		}		
 	}
 	
 	

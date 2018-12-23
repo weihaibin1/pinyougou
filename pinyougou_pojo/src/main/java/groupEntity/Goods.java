@@ -6,6 +6,7 @@ import com.pinyougou.pojo.TbItem;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Progrem: pinyougou_parent
@@ -14,24 +15,25 @@ import java.util.List;
  */
 public class Goods implements Serializable{
 
-    private TbGoods Goods;
-    private TbGoodsDesc GoodsDesc;
+    private TbGoods goods;
+    private TbGoodsDesc goodsDesc;
     private List<TbItem> itemList;
+    private Map<String,String> categoryMap;
 
     public TbGoods getGoods() {
-        return Goods;
+        return goods;
     }
 
     public void setGoods(TbGoods goods) {
-        Goods = goods;
+        this.goods = goods;
     }
 
     public TbGoodsDesc getGoodsDesc() {
-        return GoodsDesc;
+        return goodsDesc;
     }
 
     public void setGoodsDesc(TbGoodsDesc goodsDesc) {
-        GoodsDesc = goodsDesc;
+        this.goodsDesc = goodsDesc;
     }
 
     public List<TbItem> getItemList() {
@@ -40,5 +42,13 @@ public class Goods implements Serializable{
 
     public void setItemList(List<TbItem> itemList) {
         this.itemList = itemList;
+    }
+
+    public Map<String, String> getCategoryMap() {
+        return categoryMap;
+    }
+
+    public void setCategoryMap(Map<String, String> categoryMap) {
+        this.categoryMap = categoryMap;
     }
 }

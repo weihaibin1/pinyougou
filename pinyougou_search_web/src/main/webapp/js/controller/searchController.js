@@ -1,4 +1,5 @@
-app.controller("searchController",function ($scope,$controller,searchService) {
+//$location接收路由传递的参数内置对象
+app.controller("searchController",function ($scope,$controller,$location,searchService) {
 
     //控制器继承代码
     $controller("baseController",{$scope:$scope});
@@ -15,6 +16,16 @@ app.controller("searchController",function ($scope,$controller,searchService) {
         pageNo:1, //当前页
         pageSize:60 //每页记录数
     };
+
+    //基于$location接收门户网站传递的搜索关键字
+    var keywords=$location.search()["keywords"];
+    if(keywords!="undefined"){
+        //输入了搜索关键字
+        $scope.searchMap.keywords=keywords;
+    }else {
+        //没有输入关键字  注意：实际业务中，做关键字广告推广
+        $scope.searchMap.keywords="手机";
+    }
 
     //商品搜索
     $scope.search=function () {

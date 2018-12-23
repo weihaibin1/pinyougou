@@ -52,7 +52,7 @@ public class GoodsController {
 	@RequestMapping("/add")
 	public Result add(@RequestBody Goods goods){
 		try {
-			//基于安全框架获取商家id
+			//基于安全框架获取商家id关联到录入商品
 			String sellerId = SecurityContextHolder.getContext().getAuthentication().getName();
 			goods.getGoods().setSellerId(sellerId);
 			goodsService.add(goods);
@@ -119,6 +119,7 @@ public class GoodsController {
 		return goodsService.findPage(goods, page, rows);		
 	}
 
+
 	/**
 	 * 批量上下架
 	 * @param ids
@@ -137,5 +138,5 @@ public class GoodsController {
 			return new Result(false, "上下架失败");
 		}
 	}
-
+	
 }

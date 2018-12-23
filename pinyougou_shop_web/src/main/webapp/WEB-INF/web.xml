@@ -47,7 +47,7 @@
 		</listener-class>
 	</listener>
 
-	<!--spring过滤器链配置  固定配置名称不可改变-->
+	<!--spring过滤器链配置 固定配置名称不可改变-->
 	<filter>
 		<filter-name>springSecurityFilterChain</filter-name>
 		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>

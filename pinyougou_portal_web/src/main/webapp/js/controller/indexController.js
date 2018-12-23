@@ -10,4 +10,10 @@ app.controller("indexController",function ($scope,$controller,contentService) {
             $scope.contentList=response;
         })
     }
+
+    //门户网站搜索功能    与搜索模块对接
+    $scope.search=function () {
+        //注意：angularjs页面传参时(路由传参)，请求参数？号前面，需要加#
+        location.href="http://search.pinyougou.com/search.html#?keywords="+$scope.keywords;
+    }
 })

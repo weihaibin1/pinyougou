@@ -1,6 +1,5 @@
 package com.pinyougou.sellergoods.service.impl;
-import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import com.alibaba.dubbo.config.annotation.Service;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
@@ -9,8 +8,10 @@ import com.pinyougou.pojo.TbItem;
 import com.pinyougou.pojo.TbItemExample;
 import com.pinyougou.pojo.TbItemExample.Criteria;
 import com.pinyougou.sellergoods.service.ItemService;
-
 import entity.PageResult;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.List;
 
 /**
  * 服务实现层
@@ -36,7 +37,7 @@ public class ItemServiceImpl implements ItemService {
 	 */
 	@Override
 	public PageResult findPage(int pageNum, int pageSize) {
-		PageHelper.startPage(pageNum, pageSize);		
+		PageHelper.startPage(pageNum, pageSize);
 		Page<TbItem> page=   (Page<TbItem>) itemMapper.selectByExample(null);
 		return new PageResult(page.getTotal(), page.getResult());
 	}
@@ -129,7 +130,7 @@ public class ItemServiceImpl implements ItemService {
 	
 		}
 		
-		Page<TbItem> page= (Page<TbItem>)itemMapper.selectByExample(example);		
+		Page<TbItem> page= (Page<TbItem>)itemMapper.selectByExample(example);
 		return new PageResult(page.getTotal(), page.getResult());
 	}
 	

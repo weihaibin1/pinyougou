@@ -59,11 +59,11 @@ public class SolrTest {
     /**
      * 根据id查询
      */
-    @Test
+/*    @Test
     public void queryByIdTest(){
         TbItem item = solrTemplate.getById(1L, TbItem.class);
         System.out.println(item.getId()+"  "+item.getBrand()+" " +item.getTitle()+"  "+item.getSeller());
-    }
+    }*/
 
     /**
      * 根据id删除

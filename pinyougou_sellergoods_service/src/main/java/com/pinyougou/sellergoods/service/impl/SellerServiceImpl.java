@@ -1,7 +1,4 @@
 package com.pinyougou.sellergoods.service.impl;
-import java.util.Date;
-import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
@@ -10,8 +7,11 @@ import com.pinyougou.pojo.TbSeller;
 import com.pinyougou.pojo.TbSellerExample;
 import com.pinyougou.pojo.TbSellerExample.Criteria;
 import com.pinyougou.sellergoods.service.SellerService;
-
 import entity.PageResult;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.Date;
+import java.util.List;
 
 /**
  * 服务实现层
@@ -47,10 +47,10 @@ public class SellerServiceImpl implements SellerService {
 	 */
 	@Override
 	public void add(TbSeller seller) {
-		//商家状态和create_timr需要后端组装
-		seller.setStatus("0");   //未审核
+		//商家状态和create_time需要后端组装
+		seller.setStatus("0"); //未审核 0
 		seller.setCreateTime(new Date());
-		sellerMapper.insert(seller);		
+		sellerMapper.insert(seller);
 	}
 
 	
@@ -166,7 +166,7 @@ public class SellerServiceImpl implements SellerService {
 
 	@Override
 	public void updateStatus(String sellerId, String status) {
-		//update tb_seller set status = ? where sellerId=?
+		//update tb_seller set status=? wehere sellerId=?
 		TbSeller tbSeller = sellerMapper.selectByPrimaryKey(sellerId);
 		tbSeller.setStatus(status);
 		sellerMapper.updateByPrimaryKey(tbSeller);

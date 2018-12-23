@@ -19,7 +19,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/seller")
-public class  SellerController {
+public class SellerController {
 
 	@Reference
 	private SellerService sellerService;

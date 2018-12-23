@@ -31,7 +31,7 @@ app.service('typeTemplateService',function($http){
 	}
 
 	//查询模板关联的规格列表数据
-    this.findSpecList=function(id){
+	this.findSpecList=function (id) {
         return $http.get('../typeTemplate/findSpecList.do?id='+id);
     }
 });

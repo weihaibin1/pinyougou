@@ -25,7 +25,7 @@ public interface BrandService {
 
     void delete(Long[] ids);
 
-    public PageResult search(Integer pageNum, Integer pageSize, TbBrand brand);
+    public PageResult search(TbBrand brand,Integer pageNum, Integer pageSize);
 
     List<Map> selectBrandList();
 }

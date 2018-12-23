@@ -113,11 +113,12 @@ public class ItemCatController {
 	}
 
 	/**
-	 * 根据父id查询讯子分类
+	 * 根据父id查询子分类
 	 * @return
 	 */
 	@RequestMapping("/findByParentId")
 	public List<TbItemCat> findByParentId(Long parentId){
 		return itemCatService.findByParentId(parentId);
 	}
+	
 }

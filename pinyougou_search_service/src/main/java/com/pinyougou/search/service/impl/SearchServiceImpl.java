@@ -14,15 +14,9 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-/**
- * @Progrem: pinyougou_parent
- * @Author: weihaibin
- * @Date: 2018-12-18 20:33
- */
 @Service
 @Transactional
-public class SearchServiceImpl implements SearchService{
+public class SearchServiceImpl implements SearchService {
 
     @Autowired
     private SolrTemplate solrTemplate;
@@ -47,7 +41,6 @@ public class SearchServiceImpl implements SearchService{
         //将关键字搜索条件对象赋值给查询对象
         query.addCriteria(criteria);
 
-
         //2、构建分类过滤条件查询
         String category = (String) searchMap.get("category");
         if (category!=null && !"".equals(category)) {
@@ -58,26 +51,27 @@ public class SearchServiceImpl implements SearchService{
             query.addFilterQuery(filterQuery);
         }
 
-        //3.构建品牌过滤条件查询
+        //3、构建品牌过滤条件查询
         String brand = (String) searchMap.get("brand");
         if (brand!=null && !"".equals(brand)) {
-            //构建分类查询条件
+            //构建查询条件
             Criteria brandCriteria= new Criteria("item_brand").is(brand);
             //构建过滤条件查询
             FilterQuery filterQuery = new SimpleFilterQuery(brandCriteria);
             query.addFilterQuery(filterQuery);
         }
 
-        //4.构建规格过滤条件查询
+        //4、构建规格过滤条件查询
         Map<String,String> specMap = (Map<String, String>) searchMap.get("spec");
         if (specMap!=null) {
-            for (String key : specMap.keySet()) {
-                //构建分类查询条件
+            for(String key :specMap.keySet()){
+                //构建查询条件
                 Criteria brandCriteria= new Criteria("item_spec_"+key).is(specMap.get(key));
                 //构建过滤条件查询
                 FilterQuery filterQuery = new SimpleFilterQuery(brandCriteria);
                 query.addFilterQuery(filterQuery);
             }
+
         }
 
         //5、构建价格区间过滤条件查询
@@ -100,25 +94,26 @@ public class SearchServiceImpl implements SearchService{
                 FilterQuery filterQuery = new SimpleFilterQuery(priceCriteria);
                 query.addFilterQuery(filterQuery);
             }
-        }
 
+        }
         //6、构建排序查询
         String sortField = (String) searchMap.get("sortField");
         String sort = (String) searchMap.get("sort");
         if (sortField!=null && !"".equals(sortField)) {
             //构建排序操作
-            if ("ASC".equals(sort)){//升序
+            if("ASC".equals(sort)){//升序
                 query.addSort(new Sort(Sort.Direction.ASC,"item_"+sortField));
             }else {
                 query.addSort(new Sort(Sort.Direction.DESC,"item_"+sortField));
             }
         }
 
-        //7.构建分页查询
+        //7、构建分页查询
         Integer pageNo = (Integer) searchMap.get("pageNo");
         Integer pageSize = (Integer) searchMap.get("pageSize");
-        query.setOffset((pageNo-1)*pageSize); //分页起始值
-        query.setRows(pageSize);   //每页记录数
+        query.setOffset((pageNo-1)*pageSize);//分页起始值  0  60
+        query.setRows(pageSize);//每页记录数
+
 
         //设置高亮
         //高亮对象
@@ -148,10 +143,10 @@ public class SearchServiceImpl implements SearchService{
         }
 
         Map<String, Object> resultMap = new HashMap<>();
-
         resultMap.put("rows",content);
-        resultMap.put("totalPages",page.getTotalPages());  //总页数
-        resultMap.put("pageNo",pageNo);         //当前页
+        resultMap.put("totalPages",page.getTotalPages());//总页数
+        resultMap.put("pageNo",pageNo);//当前页
+
         return resultMap;
     }
 }

@@ -115,9 +115,11 @@ public class TypeTemplateController {
 
 	/**
 	 * 基于模板id查询商品录入中的规格列表数据
+	 * id：模板id
 	 */
-    @RequestMapping("/findSpecList")
+	@RequestMapping("/findSpecList")
 	public List<Map> findSpecList(Long id){
 		return typeTemplateService.findSpecList(id);
 	}
+	
 }

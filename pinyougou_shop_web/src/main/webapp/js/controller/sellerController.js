@@ -57,7 +57,7 @@ app.controller('sellerController' ,function($scope,$controller   ,sellerService)
             function(response){
                 if(response.success){
                     //重新查询
-                   location.href="shoplogin.html"
+                    location.href="shoplogin.html";
                 }else{
                     alert(response.message);
                 }

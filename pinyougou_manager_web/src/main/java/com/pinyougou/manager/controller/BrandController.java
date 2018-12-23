@@ -94,7 +94,7 @@ public class BrandController {
      */
     @RequestMapping("/search")
     public PageResult search(@RequestBody TbBrand brand, Integer pageNum, Integer pageSize) {
-        return brandService.search(pageNum, pageSize,brand);
+        return brandService.search(brand,pageNum, pageSize);
     }
 
     /**
