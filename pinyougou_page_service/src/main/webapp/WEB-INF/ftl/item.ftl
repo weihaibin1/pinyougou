@@ -29,6 +29,9 @@
 		    </#list>
 		];
 
+		//当前sku商品id值（itemId）
+		var itemId = ${item.id?c}
+
 	</script>
 
 </head>
